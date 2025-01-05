@@ -4,11 +4,11 @@
         active-text-color="#ffd04b"
         background-color="#545c64"
         class="aside-container"
-        default-active="2"
         text-color="#fff"
         @open="handleOpen"
         @close="handleClose"
         :collapse="isCollapse"
+        :default-active="active"
       >
       <p class="logo-lg">{{!isCollapse?'DIDI陪诊':'DIDI'}}</p>
       <TreeMenu  :index="1" :menuData="menuData"/>
@@ -29,6 +29,7 @@ const isCollapse = computed(()=>store.state.menu.isCollapse)
 const router=useRouter()
 /* const menuData=reactive(router.options.routes[0].children)//这是写死的数据 */
 const menuData=computed(()=>store.state.menu.routerList)
+const active=computed(()=>store.state.menu.menuActive)
 console.log(router,'router')
 const handleOpen=()=>{
 

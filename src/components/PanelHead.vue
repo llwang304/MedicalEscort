@@ -1,15 +1,20 @@
 <template>
   <div class="panel-heading">
     <div class="panel-lead">
-      <div class="title">菜单管理</div>
-      <p class="description"></p>
+      <div class="title">{{props.route.meta.name}}</div>
+      <p class="description">{{props.route.meta.description}}</p>
     </div>
     
   </div>
 </template>
 
 <script setup>
-
+  //panelhead接受的参数
+  const props=defineProps({
+    route:{
+      type:Object
+    }
+  })
 </script>
 
 <style lang="less" scoped>

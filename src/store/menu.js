@@ -1,10 +1,12 @@
-const state={
+const localData=localStorage.getItem('pz_v3pz')
+const state=localData?localData.menu:{
     //菜单的展开和收起
     isCollapse:false,
     //tag的数据
     selectMenu:[],
     //menu在对应的项目中的真实路径
     routerList:[],
+    menuActive:'1-1',
 }
 const mutations={
     //mutation会默认接收一个state
@@ -52,7 +54,8 @@ const mutations={
           }
           }else{//如果有子菜单，需要递归
             console.log('如果有孩子')
-              routerSet(route.children)     
+              routerSet(route.children) 
+
           }
         });
       }
@@ -60,10 +63,10 @@ const mutations={
       routerSet(payload)
       state.routerList=payload
 
-
-
     },
-
+    updateMenuActive(state,payload){
+      state.menuActive=payload//为啥直接是这个值？
+    }
     
 }
 

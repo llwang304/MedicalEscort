@@ -1,5 +1,6 @@
 <template>
   <div>
+    <panel-head :route="route"/>
     <el-table :data="tableData.list" style="width: 100%">
       <el-table-column prop="id" label="ID" />
       <el-table-column prop="name" label="昵称" />
@@ -92,7 +93,12 @@
   import {reactive,ref,onMounted} from 'vue'
   import {Clock} from '@element-plus/icons-vue'
   import dayjs from 'dayjs'
-  //import { isObject } from 'element-plus/es/utils'
+  import {useRoute} from 'vue-router' //（用于显示panelhead）
+  const route=useRoute()//路由实例（用于显示panelhead）
+  
+
+
+
   const paginationData=reactive({
     pageNum:1,//页码
     pageSize:10,//每页多少条

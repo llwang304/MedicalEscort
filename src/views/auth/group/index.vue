@@ -1,6 +1,6 @@
 <template>
   <div>
-    <panel-head/>
+    <panel-head :route="route"/>
     <div class="btns">
       <el-button type="primary" :icon="Plus" @click="editForm(null)" size="small">打开</el-button>
     </div>
@@ -82,7 +82,11 @@
   import {ref,reactive,onMounted, nextTick} from 'vue'
   import { userGetMenu, userSetMenu,menuList } from '../../../api'
   import {Plus} from '@element-plus/icons-vue'
-  
+  import {useRoute} from 'vue-router' //（用于显示panelhead）
+  const route=useRoute()//路由实例（用于显示panelhead）
+
+
+
 
   const  dialogFormVisible=ref(false)//弹窗的显示隐藏0表示隐藏，1表示显示
   const form=reactive({

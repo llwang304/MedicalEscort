@@ -37,11 +37,12 @@ const store=useStore()//取得store的实例
 
 
 
-//点击菜单
+//点击菜单   (2025.1.3更新，你看我现在才发现之前就曾经传了一个active参数过来，这个active是从哪来的？)
 const handleClick = (item,active) => {
   console.log(item,'item')
   router.push(item.meta.path)
   store.commit('addMenu',item.meta)
+  store.commit('updateMenuActive',active)
 
 }
 /* function handleClick(item,active){

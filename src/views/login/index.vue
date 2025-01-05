@@ -46,6 +46,9 @@
   import {getCode, userAuthentication,login, menuPermissions} from '../../api/index.js'
   import {useRouter} from 'vue-router'
   import { useStore } from 'vuex'
+
+  const router=useRouter()
+
   const store=useStore()//取得store的实例
   const routerList=computed(()=>store.state.menu.routerList)
 
@@ -141,7 +144,7 @@
     })
   }
 
-  const router=useRouter()
+  
   const loginFormRef=ref()
 
   //提交表单

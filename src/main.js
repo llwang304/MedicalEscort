@@ -6,7 +6,6 @@ import router from './router'//引入router
 import store from './store'
 import PanelHead from '../src/components/PanelHead.vue'
 
-
 router.beforeEach((to,from)=>{
   const token=localStorage.getItem('pz_token')
   //非登陆页面token不存在，
@@ -18,6 +17,18 @@ router.beforeEach((to,from)=>{
     return true//true是什么？
   }
 })
+
+//刷新后的动态路由添加
+const localData=localStorage.getItem('pz_v3pz')
+if(localData){
+  store.commit('dynamicMenu',JSON.parse(localData).menu.routerList)
+  store.state.menu.routerList.forEach(item=>{
+    router.addRoute('main',item)
+  })
+}else{
+
+}
+
 // 如果您正在使用CDN引入，请删除下面一行。
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 const app = createApp(App)

@@ -24,9 +24,9 @@
         <el-dropdown @command="handleClick">
             <div class="el-dropdown-link flex-box">
                 <el-avatar
-                    src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+                    :src="userInfo.avatar"                    
                 />
-                <p class="user-name">admin</p>
+                <p class="user-name">{{userInfo.name}}</p>
             </div>
         <!-- <span class="el-dropdown-link">
         Dropdown List
@@ -59,6 +59,8 @@
     const route=useRoute()
     const router=useRouter()
 
+
+    const userInfo=JSON.parse(localStorage.getItem('pz_userInfo'))//写死的数据，没有安排更改功能，所以不需要用到响应式
     //点击关闭tag
     const closeTab=(item,index)=>{
         store.commit('closeMenu',item)
@@ -91,6 +93,7 @@
         //清除缓存中保存的token
         localStorage.removeItem('pz_token')
         localStorage.removeItem('pz_userInfo')
+        localStorage.removeItem('pz_v3pz')
         //将当前页面的完整 URL 设置为当前页面的协议、域名和端口号部分。
         //简单来说，它会让浏览器重新加载当前网站的根目录（如果有默认的首页文件，如index.html，就会加载这个文件）
         window.location.href=window.location.origin
