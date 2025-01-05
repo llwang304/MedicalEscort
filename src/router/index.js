@@ -7,6 +7,10 @@ import Order from '../views/vppz/order/index.vue'
 import Staff from '../views/vppz/staff/index.vue'
 import Dashboard from '../views/dashboard/index.vue' */
 
+
+//获取动态路由数据
+const localData=localStorage.getItem('pz_v3pz')
+
 /* const routes=[
     {
         path:'/',
@@ -72,6 +76,21 @@ const routes=[
       path:'/',
       name:'main',
       component:Layout,
+      redirect:to=>{
+        //实现重定向功能。需要结合动态路由数据
+        if(localData){
+          //取子菜单中的第一个
+          const child =JSON.parse(localData).menu.routerList[0].children
+          if(child){
+            return child[0].meta.path
+          }else{
+            return JSON.parse(localData).menu.routerList[0].meta.path
+          }
+        }else{
+          //return '/'//这里有问题，too much recursion
+          return '/auth/admin' 
+        }
+      },
       children:[],
   },
   {
