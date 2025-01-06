@@ -50,3 +50,24 @@ export const updateUser=(data)=>{
 export const menuPermissions=()=>{
   return request.get('/menu/permissions')
 }
+
+/*------------------staff页面------------------*/
+//陪护师头像
+export const photoList=()=>{
+  return request.get('/photo/list')
+}
+
+//陪护师创建
+export const companion=(data)=>{
+  return request.post('/companion',data)
+}
+
+//陪护列表
+export const companionList=(params)=>{
+  return request.get('/companion/list',{params}) //pagenum,pagetotal
+}
+
+//陪护师删除post,传id array[string]
+export const deleteCompanion=(data)=>{
+  return request.post('/delete/companion',data)
+}

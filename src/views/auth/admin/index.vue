@@ -68,8 +68,6 @@
       </el-form-item>
       <el-form-item label="菜单权限" prop="permissions_id">
         <el-select v-model="permissions_id" placeholder="请选择菜单权限" clearable style="width:240px">
-          <!-- <el-option label="超级管理员" value="超级管理员" />
-          <el-option label="DIDI" value="DIDI" /> -->
           <el-option v-for="item in options" :key=item.id :label="item.name" :value="item.id"/>
         </el-select>
       </el-form-item>
