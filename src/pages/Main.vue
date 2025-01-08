@@ -1,6 +1,5 @@
 <template>
   <div>
-    <div>layout</div>
     <router-view />
     <van-tabbar v-model="active">
       <!-- 注意icon要写成:icon因为是动态属性,url会使得在按tabbar时使得网页url改成/#/order,/#/user -->
