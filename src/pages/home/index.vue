@@ -29,6 +29,7 @@
       </van-col>
     </van-row>
     <van-row 
+    @click="goOrder(item)"
       class="yy-list"
       justify="space-around"
       v-for="(item) in homeData.hospitals" :key="item.id"
@@ -60,10 +61,13 @@
 
 <script setup>
   import { ref,onMounted,reactive,getCurrentInstance} from 'vue';
+  import {useRouter} from 'vue-router'
   import { showToast } from 'vant';
 
   //获取当前vue实例
   const {proxy} =getCurrentInstance()
+  //获取router实例
+  const router=useRouter()
 
   /*--------------------搜索框--------------------*/
   const searchValue = ref('');
@@ -78,8 +82,13 @@
   })
   /*slides */
   /*nav2s*/
-  const goOrderTwo=(index)=>{
-
+  const goOrderTwo=(index)=>{//没太理解,这个不是nav2s的方法吗？和hospital没什么关系啊,他怎么知道要跳转哪个医院的？应该只能决定是就医陪诊或者陪护吧
+    const id=homeData.hospitals[index].id
+    router.push(`/createOrder?id=${id}`)
+  }
+  /*hospitals*/
+  const goOrder=(item)=>{
+    router.push(`/createOrder?id=${item.id}`)
   }
 
 
