@@ -104,6 +104,13 @@
         @cancel="showCompanion = false"
       />
     </van-popup>
+    <!-- 支付二维码弹窗 -->
+    <van-dialog v-model:show="showCode" :show-confirm-button="false">
+      <van-icon name="cross" class="close" @click="closeCode"/>
+      <div>微信支付</div>
+      <van-image width="150px" height="150px" :src="codeImg" />
+      <div>请使用本人微信扫描二维码</div>
+    </van-dialog>
   </div>
 </template>
 
@@ -111,6 +118,8 @@
 import {onMounted,ref,reactive,computed,getCurrentInstance} from 'vue'
 import {useRouter} from 'vue-router'
 import Statusbar from '../../components/statusBar.vue'
+import Qrcode from 'qrcode'
+
 const router=useRouter()
 const {proxy} =getCurrentInstance()//获取当前 Vue 组件实例的代理对象
 
@@ -134,7 +143,8 @@ const orderData=reactive({
 })
 
 //提交时表格内容
-const form =reactive({
+const form =reactive(
+  {
   hospital_id:'',
   hospital_name:'',
   demand:'',//备注
@@ -186,10 +196,40 @@ const companionConfirm=(item)=>{//item是这个插件预设的一个关联值，
   showCompanion.value = false
 }
 
-//提交订单
-const submit=()=>{
-
+//二维码
+const showCode=ref(false)
+const codeImg=ref('')
+const closeCode=()=>{
+  showCode.value=false
+  router.push('/order')
+  
 }
+//提交订单
+const submit=async()=>{
+  const params=[
+    'hospital_id',
+    'hospital_name',
+    'demand',//备注
+    'companion_id',//陪护师id
+    'receiveAddress',//接送地址
+    'tel',//联系电话
+    'starttime',//服务开始时间
+  ]
+  for (const i of params){//是否可以在表单中加rules实现
+    if((form[i]==='')){
+      showNotify({ message: '请把每一项都填写' });
+      return
+    }
+  }
+  const {data:orderRes}=await proxy.$api.createOrder(form)
+  console.log('orderRes',orderRes)
+  Qrcode.toDataURL(orderRes.data.wx_code).then((url)=>{
+    showCode.value=true
+    codeImg.value=url
+  })
+}
+
+
 
 /*--------------------Onmounted--------------------*/
 onMounted(async()=>{
