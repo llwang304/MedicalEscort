@@ -60,7 +60,7 @@
 </template>
 
 <script setup>
-  import { ref,onMounted,reactive,getCurrentInstance} from 'vue';
+  import {ref,onMounted,reactive,getCurrentInstance} from 'vue';
   import {useRouter} from 'vue-router'
   import { showToast } from 'vant';
 
