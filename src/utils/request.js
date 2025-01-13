@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const http=axios.create({
-    baseURL: 'https:/v3pz.itndedu.com/v3pz/',
+    baseURL: 'https:/v3pz.itndedu.com/v3pz',
     timeout: 10000,
     headers:{"terminal":"h5"}
 })

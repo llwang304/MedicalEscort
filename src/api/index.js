@@ -23,4 +23,8 @@ export default{
   createOrder(data){
     return request.post('/createOrder',data)
   },
+  //订单列表
+  orderList(params){
+    return request.get('/order/list',{params})//get的参数需要用对象来传递
+  }
 }
